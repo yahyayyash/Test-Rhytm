@@ -91,6 +91,7 @@ public class Lane : MonoBehaviour
         note.GetComponent<Note>().assignedTime = timeStamps[spawnIndex];
         note.GetComponent<Note>().noteLength = noteDurations[spawnIndex];
         notes.Add(note.GetComponent<Note>());
+        Debug.Log($"Note Length for {spawnIndex} notes is {(float)noteDurations[spawnIndex]}");
         spawnIndex++;
     }
 

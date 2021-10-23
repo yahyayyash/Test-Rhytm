@@ -18,10 +18,19 @@ public class SongManager : MonoBehaviour
 
     public string fileLocation;
     public float noteTime; //Time needed for the note spawn location to the tap location
-    public float noteSpawnX;
     public float noteTapX;
+    public float displayedBar;
+    //public float noteSpawnX;
 
     public static MidiFile midiFile;
+
+    public float noteSpawnX
+    {
+        get
+        {
+            return midiBPM * displayedBar * 4;
+        }
+    }
 
     public float noteDespawnX
     {
@@ -31,7 +40,7 @@ public class SongManager : MonoBehaviour
         }
     }
 
-    static float midiBPM
+    public static float midiBPM
     {
         get
         {
