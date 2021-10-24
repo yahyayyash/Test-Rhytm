@@ -12,7 +12,7 @@ public class Note : MonoBehaviour
     void Start()
     {
         timeInstantiated = SongManager.GetAudioSourceTime();
-        GetComponent<SpriteRenderer>().size = new Vector2(noteLength * 10, 0.6f);
+        GetComponent<SpriteRenderer>().size = new Vector2(noteLength * 2.5f, 0.6f);
     }
 
     //Update is called once per frame

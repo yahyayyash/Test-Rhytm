@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class MIDI
+public class MIDI2
 {
     [System.Serializable]
     public class Tempo

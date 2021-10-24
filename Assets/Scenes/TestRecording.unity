@@ -415,8 +415,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6141cddbc8cb04dc4a0ef3fb84c0126c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textJSON: {fileID: 4900000, guid: 41446d9f4481842bc819221e6697fda4, type: 3}
+  textJSON1: {fileID: 4900000, guid: 41446d9f4481842bc819221e6697fda4, type: 3}
+  textJSON2: {fileID: 4900000, guid: f7b4d08e8b2bd4e649d9139eabf2d12f, type: 3}
   midiFile:
+    header:
+      name: 
+      ppq: 0
+      tempo: []
+    tracks: []
+  midiFile2:
     tempo: []
     timeSignature: []
     startTime: 0

@@ -88,7 +88,7 @@ public class PitchAnalyzer : MonoBehaviour
 
         //AnalyzeSound();
 
-        display.text = $"{pitchValue} Hz";
+        //display.text = $"{pitchValue} Hz";
 
     }
 

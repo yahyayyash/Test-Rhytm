@@ -25,15 +25,12 @@ public class Lane : MonoBehaviour
     {
     }
 
-    public void SetTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array)
+    public void SetTimeStamps(MIDI.Notes[] array)
     {
         foreach (var note in array)
         {
-            var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, SongManager.midiFile.GetTempoMap());
-            timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f);
-
-            var noteTime = note.LengthAs<MusicalTimeSpan>(SongManager.midiFile.GetTempoMap());
-            noteDurations.Add((float)noteTime.Numerator / (float)noteTime.Denominator);
+            timeStamps.Add(note.time);
+            noteDurations.Add((float)note.durationTicks / SongManager.midiFile.header.ppq);
         }
     }
 
