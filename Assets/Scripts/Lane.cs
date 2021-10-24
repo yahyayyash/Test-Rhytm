@@ -15,7 +15,7 @@ public class Lane : MonoBehaviour
     List<Note> notes = new List<Note>();
     public List<double> timeStamps = new List<double>();
     public List<float> noteDurations = new List<float>();
-    
+
     int spawnIndex = 0;
     int inputIndex = 0;
     int barIndex = 0;
@@ -43,7 +43,7 @@ public class Lane : MonoBehaviour
 
         if (SongManager.GetCurrentBeat() >= barIndex)
         {
-            //Debug.Log($"Current Beat = {SongManager.GetCurrentBeat()}, Current Index {barIndex}");
+            //Debug.Log($"Current Time = {SongManager.GetAudioSourceTime()}, Current Beat = {SongManager.GetCurrentBeat()}, Current Index {barIndex}");
             SpawnMusicBar();
         }
 
@@ -75,6 +75,7 @@ public class Lane : MonoBehaviour
                     //print($"Hit inaccurate on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
                 }
             }
+
             if (timeStamp + marginOfError <= audioTime)
             {
                 Miss();
@@ -98,7 +99,7 @@ public class Lane : MonoBehaviour
     {
         var bar = Instantiate(barPrefab, transform);
         bar.GetComponent<Bar>().assignedTime = SongManager.GetAudioSourceTime();
-        barIndex ++;
+        barIndex++;
     }
 
     private void Miss()
