@@ -37,49 +37,51 @@ public class Lane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (SongManager.GetCurrentBeat() >= barIndex)
+        if (SongManager.Instance.songPlayed)
         {
-            //Debug.Log($"Current Time = {SongManager.GetAudioSourceTime()}, Current Beat = {SongManager.GetCurrentBeat()}, Current Index {barIndex}");
-            SpawnMusicBar();
-        }
-
-        if (spawnIndex < timeStamps.Count)
-        {
-            if (SongManager.GetAudioSourceTime() >= timeStamps[spawnIndex] - SongManager.Instance.noteTime)
+            if (SongManager.GetCurrentBeat() >= barIndex)
             {
-                SpawnMusicNote();
+                //Debug.Log($"Current Time = {SongManager.GetAudioSourceTime()}, Current Beat = {SongManager.GetCurrentBeat()}, Current Index {barIndex}");
+                SpawnMusicBar();
             }
-        }
 
-        if (inputIndex < timeStamps.Count)
-        {
-            double timeStamp = timeStamps[inputIndex];
-            double marginOfError = SongManager.Instance.marginOfError;
-            double audioTime = SongManager.GetAudioSourceTime() - (SongManager.Instance.inputDelayInMilliseconds / 1000.0);
-
-            if (Input.GetKeyDown(input))
+            if (spawnIndex < timeStamps.Count)
             {
-                if (Math.Abs(audioTime - timeStamp) < marginOfError)
+                if (SongManager.GetAudioSourceTime() >= timeStamps[spawnIndex] - SongManager.Instance.noteTime)
                 {
-                    Hit();
-                    notes[inputIndex].gameObject.GetComponent<SpriteRenderer>().sprite = noteRight;
-                    //Destroy(notes[inputIndex].gameObject);
+                    SpawnMusicNote();
+                }
+            }
+
+            if (inputIndex < timeStamps.Count)
+            {
+                double timeStamp = timeStamps[inputIndex];
+                double marginOfError = SongManager.Instance.marginOfError;
+                double audioTime = SongManager.GetAudioSourceTime() - (SongManager.Instance.inputDelayInMilliseconds / 1000.0);
+
+                if (Input.GetKeyDown(input))
+                {
+                    if (Math.Abs(audioTime - timeStamp) < marginOfError)
+                    {
+                        Hit();
+                        notes[inputIndex].gameObject.GetComponent<SpriteRenderer>().sprite = noteRight;
+                        //Destroy(notes[inputIndex].gameObject);
+                        inputIndex++;
+                    }
+                    else
+                    {
+                        //print($"Hit inaccurate on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
+                    }
+                }
+
+                if (timeStamp + marginOfError <= audioTime)
+                {
+                    Miss();
+                    notes[inputIndex].gameObject.GetComponent<SpriteRenderer>().sprite = noteWrong;
                     inputIndex++;
                 }
-                else
-                {
-                    //print($"Hit inaccurate on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
-                }
-            }
 
-            if (timeStamp + marginOfError <= audioTime)
-            {
-                Miss();
-                notes[inputIndex].gameObject.GetComponent<SpriteRenderer>().sprite = noteWrong;
-                inputIndex++;
             }
-
         }
     }
 

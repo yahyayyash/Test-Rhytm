@@ -17,11 +17,11 @@ public class SongManager : MonoBehaviour
     public int inputDelayInMilliseconds;
 
     public TextAsset midiJSON;
+    public static MIDI.MidiFile midiFile;
+
     public float noteTime; //Time needed for the note spawn location to the tap location
     public float noteSpawnX;
     public float noteTapX;
-
-    public static MIDI.MidiFile midiFile;
 
     public float noteDespawnX
     {
@@ -31,15 +31,11 @@ public class SongManager : MonoBehaviour
         }
     }
 
-    static float midiBPM = 0.6f;
+    // Position Tracking
+    double dspTimeSong;
+    public bool songPlayed = false;
 
-    //static float midiBPM
-    //{
-    //    get
-    //    {
-    //        return (60 / (float)midiFile.header.tempo[0].bpm);
-    //    }
-    //}
+    static float midiBPM = 0.6f;
 
     // Start is called before the first frame update
     void Start()
@@ -62,13 +58,16 @@ public class SongManager : MonoBehaviour
 
     private void StartSong()
     {
+        dspTimeSong = AudioSettings.dspTime;
+        songPlayed = true;
         audioSource.Play();
     }
 
     // Get current playback position in metric times
     public static double GetAudioSourceTime()
     {
-        return (double)Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
+        //return (double)Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
+        return AudioSettings.dspTime - Instance.dspTimeSong;
     }
 
     // Get current beat in float
