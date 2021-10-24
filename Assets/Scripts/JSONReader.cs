@@ -6,60 +6,14 @@ public class JSONReader : MonoBehaviour
 {
     public TextAsset textJSON;
 
-    [System.Serializable]
-    public class Tempo
-    {
-        public int absoluteTime;
-        public int seconds;
-        public int bpm;
-    }
-
-    [System.Serializable]
-    public class TimeSignature
-    {
-        public int absoluteTime;
-        public int seconds;
-        public int numerator;
-        public int denominator;
-        public int click;
-        public int notesQ;
-    }
-
-    [System.Serializable]
-    public class Tracks
-    {
-        public float startTime;
-        public double duration;
-        public int length;
-        public Notes[] notes;
-    }
-
-    [System.Serializable]
-    public class Notes
-    {
-        public string name;
-        public int midi;
-        public float time;
-        public double velocity;
-        public double duration;
-    }
-
-    [System.Serializable]
-    public class MidiFile
-    {
-        public Tempo[] tempo;
-        public TimeSignature[] timeSignature;
-        public float startTime;
-        public double duration;
-        public Tracks[] tracks;
-    }
-
-    public MidiFile midiFile = new MidiFile();
+    public MIDI.MidiFile midiFile = new MIDI.MidiFile();
 
     // Start is called before the first frame update
     void Start()
     {
-        midiFile = JsonUtility.FromJson<MidiFile>(textJSON.text);
+        //midiFile = JsonUtility.FromJson<MIDI.MidiFile>(textJSON.text);
+        midiFile = MIDI.CreateFromJSON(textJSON.text);
+        Debug.Log($"BPM = {midiFile.tempo[0].bpm}, FIRST NOTE = {midiFile.tracks[0].notes[0].name}");
     }
 
     // Update is called once per frame
