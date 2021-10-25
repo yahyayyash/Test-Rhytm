@@ -132,10 +132,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 22021475}
-  - component: {fileID: 22021474}
+  - component: {fileID: 22021477}
   - component: {fileID: 22021476}
+  - component: {fileID: 22021474}
   m_Layer: 0
-  m_Name: Pitch
+  m_Name: PitchDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,19 +151,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 22021473}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f954938e2b836433098b4dcc476a6b7e, type: 3}
+  m_Script: {fileID: 11500000, guid: f87f41758be76458dbee843d5e11b4da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  qSamples: 1024
-  refValue: 0.1
-  threshold: 0.02
-  rmsValue: 0
-  dbValue: 0
-  pitchValue: 0
-  sensitivity: 100
-  loudness: 0
-  display: {fileID: 0}
-  microphone: 
 --- !u!4 &22021475
 Transform:
   m_ObjectHideFlags: 0
@@ -187,8 +178,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: f2b6f123f5d8e49ce8cf3952eea8c513, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -273,6 +264,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &22021477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22021473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c98cd8b5b004ecf9a2026e17efbe31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 22021476}
+  pitch: 0
+  midiNote: 0
 --- !u!1 &96139442
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,7 +656,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &316742093
 GameObject:
@@ -815,7 +821,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -886,7 +892,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &501269318
 GameObject:
@@ -924,6 +930,7 @@ MonoBehaviour:
   noteRight: {fileID: 21300000, guid: 46a1963c4549548e7ab9466f22532eba, type: 3}
   timeStamps: []
   noteDurations: []
+  midiNotes: 
 --- !u!4 &501269320
 Transform:
   m_ObjectHideFlags: 0
@@ -1107,7 +1114,7 @@ RectTransform:
   - {fileID: 1900561201}
   - {fileID: 96139443}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1245,7 +1252,7 @@ Transform:
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &552126247
 Animator:
@@ -1466,7 +1473,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1222146915
 GameObject:
@@ -1548,7 +1555,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1512065064
 GameObject:
@@ -1643,7 +1650,7 @@ RectTransform:
   m_Children:
   - {fileID: 705414979}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1864,7 +1871,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1863620186
 GameObject:
@@ -1895,12 +1902,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20698f451f13e4fbd8148cf038ff3fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectedPitch: {fileID: 22021477}
   audioSource: {fileID: 1109848511}
   lanes: {fileID: 501269319}
   songDelayInSeconds: 3
   marginOfError: 0.15
-  inputDelayInMilliseconds: 0
-  midiJSON: {fileID: 4900000, guid: f7b4d08e8b2bd4e649d9139eabf2d12f, type: 3}
+  inputDelayInMilliseconds: 25
+  midiJSON: {fileID: 4900000, guid: 978a4d3cb4f794e1eb2f7228d268a2e5, type: 3}
   noteTime: 3
   noteSpawnX: 16
   noteTapX: 0
@@ -1917,7 +1925,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1879687682
 GameObject:
@@ -2000,7 +2008,7 @@ Transform:
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1879687685
 Animator:
@@ -2184,7 +2192,7 @@ Transform:
   m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1966513518
 Animator:

@@ -5,6 +5,8 @@ using UnityEngine;
 public class FastYinSystem : MonoBehaviour
 {
 
+    public TMPro.TextMeshProUGUI frequencyDisplay;
+
     PitchDetector pitchDetector;
 
     FastYin fastYin;
@@ -45,6 +47,8 @@ public class FastYinSystem : MonoBehaviour
 
         pitchDetector.pitch = pitch;
         pitchDetector.midiNote = midiNote;
+
+        frequencyDisplay.text = $"{pitch} Hz";
 
         //if (midiNote != 0 && midiNote != tempMidi)
         //{

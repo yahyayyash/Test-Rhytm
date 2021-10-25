@@ -6,6 +6,9 @@ using System;
 
 public class Lane : MonoBehaviour
 {
+    public TMPro.TextMeshProUGUI accuracyScore;
+    public TMPro.TextMeshProUGUI accuracyPercentage;
+
     public KeyCode input;
     public GameObject notePrefab;
     public GameObject barPrefab;
@@ -88,7 +91,9 @@ public class Lane : MonoBehaviour
 
             }
 
-            Debug.Log($"ACCURACY {(float)correctNotes / inputIndex * 100}%");
+            accuracyScore.text = $"{correctNotes} / {inputIndex}";
+            accuracyPercentage.text = ((float)correctNotes / inputIndex * 100).ToString("0.00") + " Hz";
+            //Debug.Log($"ACCURACY {(float)correctNotes / inputIndex * 100}%");
         }
     }
 
