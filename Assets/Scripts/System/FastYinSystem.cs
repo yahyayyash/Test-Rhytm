@@ -11,7 +11,7 @@ public class FastYinSystem : MonoBehaviour
 
     FastYin fastYin;
 
-    //int tempMidi = 0;
+    int tempMidi = 0;
 
     private void Awake()
     {
@@ -49,11 +49,11 @@ public class FastYinSystem : MonoBehaviour
 
         frequencyDisplay.text = $"{pitch} Hz";
 
-        //if (midiNote != 0 && midiNote != tempMidi)
-        //{
-        //    tempMidi = midiNote;
-        //    Debug.Log($"Transcribed {midiNote}");
-        //}
+        if (midiNote != 0 && midiNote != tempMidi)
+        {
+            tempMidi = midiNote;
+            Debug.Log($"Transcribed : {midiNote}, time : {SongManager.GetAudioSourceTime()}");
+        }
     }
 
     void StartPlaying()

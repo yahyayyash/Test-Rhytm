@@ -179,7 +179,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f2b6f123f5d8e49ce8cf3952eea8c513, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 055f096f25de4485dadcd96a2e53356d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2316,7 +2316,7 @@ MonoBehaviour:
   songDelayInSeconds: 3
   marginOfError: 0.15
   inputDelayInMilliseconds: 25
-  midiJSON: {fileID: 4900000, guid: 978a4d3cb4f794e1eb2f7228d268a2e5, type: 3}
+  midiJSON: {fileID: 4900000, guid: f7b4d08e8b2bd4e649d9139eabf2d12f, type: 3}
   noteTime: 3
   noteSpawnX: 16
   noteTapX: 0

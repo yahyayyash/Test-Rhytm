@@ -60,7 +60,7 @@ public class SongManager : MonoBehaviour
 
     private void StartSong()
     {
-        dspTimeSong = AudioSettings.dspTime;
+        //dspTimeSong = AudioSettings.dspTime;
         songPlayed = true;
         detectedPitch.source.Play();
         audioSource.Play();
@@ -69,8 +69,8 @@ public class SongManager : MonoBehaviour
     // Get current playback position in metric times
     public static double GetAudioSourceTime()
     {
-        //return (double)Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
-        return AudioSettings.dspTime - Instance.dspTimeSong;
+        return (double)Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
+        //return AudioSettings.dspTime - Instance.dspTimeSong;
     }
 
     // Get current beat in float
