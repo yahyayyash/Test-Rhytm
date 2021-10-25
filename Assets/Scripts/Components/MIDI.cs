@@ -14,7 +14,7 @@ public class MIDI
     public class Header
     {
         public string name;
-        public int ppq;
+        public int ppq; // pulse per quarter
         public Tempos[] tempo;
     }
 

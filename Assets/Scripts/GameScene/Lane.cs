@@ -92,7 +92,7 @@ public class Lane : MonoBehaviour
             }
 
             accuracyScore.text = $"{correctNotes} / {inputIndex}";
-            accuracyPercentage.text = ((float)correctNotes / inputIndex * 100).ToString("0.00") + " Hz";
+            accuracyPercentage.text = ((float)correctNotes / inputIndex * 100).ToString("0.00") + " %";
             //Debug.Log($"ACCURACY {(float)correctNotes / inputIndex * 100}%");
         }
     }

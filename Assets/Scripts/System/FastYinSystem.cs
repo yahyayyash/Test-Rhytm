@@ -41,7 +41,6 @@ public class FastYinSystem : MonoBehaviour
         var pitch = result.getPitch();
         var midiNote = 0;
         var midiCents = 0;
-        
 
         Pitch.PitchDsp.PitchToMidiNote(pitch, out midiNote, out midiCents);
 
