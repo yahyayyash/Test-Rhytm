@@ -9,6 +9,8 @@ using System;
 
 public class SongManager : MonoBehaviour
 {
+
+    public PitchDetector detectedPitch;
     public static SongManager Instance;
     public AudioSource audioSource;
     public Lane lanes;
@@ -60,6 +62,7 @@ public class SongManager : MonoBehaviour
     {
         dspTimeSong = AudioSettings.dspTime;
         songPlayed = true;
+        detectedPitch.source.Play();
         audioSource.Play();
     }
 

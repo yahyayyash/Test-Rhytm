@@ -15,10 +15,12 @@ public class Lane : MonoBehaviour
     List<Note> notes = new List<Note>();
     public List<double> timeStamps = new List<double>();
     public List<float> noteDurations = new List<float>();
+    public List<int> midiNotes = new List<int>();
 
     int spawnIndex = 0;
     int inputIndex = 0;
     int barIndex = 0;
+    int correctNotes = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,7 @@ public class Lane : MonoBehaviour
         {
             timeStamps.Add(note.time);
             noteDurations.Add((float)note.durationTicks / SongManager.midiFile.header.ppq);
+            midiNotes.Add(note.midi);
         }
     }
 
@@ -59,13 +62,15 @@ public class Lane : MonoBehaviour
                 double marginOfError = SongManager.Instance.marginOfError;
                 double audioTime = SongManager.GetAudioSourceTime() - (SongManager.Instance.inputDelayInMilliseconds / 1000.0);
 
-                if (Input.GetKeyDown(input))
+                //if (Input.GetKeyDown(input))
+                if (SongManager.Instance.detectedPitch.midiNote == midiNotes[inputIndex])
                 {
                     if (Math.Abs(audioTime - timeStamp) < marginOfError)
                     {
                         Hit();
                         notes[inputIndex].gameObject.GetComponent<SpriteRenderer>().sprite = noteRight;
                         //Destroy(notes[inputIndex].gameObject);
+                        correctNotes++;
                         inputIndex++;
                     }
                     else
@@ -82,6 +87,8 @@ public class Lane : MonoBehaviour
                 }
 
             }
+
+            Debug.Log($"ACCURACY {(float)correctNotes / inputIndex * 100}%");
         }
     }
 
