@@ -60,17 +60,19 @@ public class SongManager : MonoBehaviour
 
     private void StartSong()
     {
-        //dspTimeSong = AudioSettings.dspTime;
         songPlayed = true;
-        detectedPitch.source.Play();
-        audioSource.Play();
+        dspTimeSong = AudioSettings.dspTime;
+        detectedPitch.source.PlayScheduled(0);
+        audioSource.PlayScheduled(0);
+        //detectedPitch.source.Play();
+        //audioSource.Play();
     }
 
     // Get current playback position in metric times
     public static double GetAudioSourceTime()
     {
-        return (double)Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
-        //return AudioSettings.dspTime - Instance.dspTimeSong;
+        //return (double)Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
+        return AudioSettings.dspTime - Instance.dspTimeSong;
     }
 
     // Get current beat in float

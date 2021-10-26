@@ -12,7 +12,7 @@ public class FastYinSystem : MonoBehaviour
     FastYin fastYin;
 
     int tempMidi = 0;
-
+    double dspTime;
     private void Awake()
     {
         pitchDetector = GetComponent<PitchDetector>();
@@ -21,7 +21,8 @@ public class FastYinSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fastYin = new FastYin(44100, 1024);
+        fastYin = new FastYin(pitchDetector.source.clip.frequency, 1024);
+        StartPlaying();
         //MicrophoneSetup();
     }
 
@@ -47,18 +48,20 @@ public class FastYinSystem : MonoBehaviour
         pitchDetector.pitch = pitch;
         pitchDetector.midiNote = midiNote;
 
-        frequencyDisplay.text = $"{pitch} Hz";
+        //frequencyDisplay.text = $"{pitch} Hz";
 
         if (midiNote != 0 && midiNote != tempMidi)
         {
             tempMidi = midiNote;
-            Debug.Log($"Transcribed : {midiNote}, time : {SongManager.GetAudioSourceTime()}");
+            //Debug.Log($"Transcribed : {midiNote}, time : {SongManager.GetAudioSourceTime()}");
+            Debug.Log($"FASTYIN Transcribed : {midiNote}, time : {AudioSettings.dspTime - dspTime}");
         }
     }
 
     void StartPlaying()
     {
-        pitchDetector.source.Play();
+        dspTime = AudioSettings.dspTime;
+        pitchDetector.source.PlayScheduled(0);
     }
 
     void MicrophoneSetup()

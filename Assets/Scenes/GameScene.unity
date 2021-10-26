@@ -163,7 +163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 22021473}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8225544, y: -0.19065693, z: -4.540739}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -179,9 +179,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 055f096f25de4485dadcd96a2e53356d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 50be1fe02775140a39eb77a90061653d, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1646,7 +1646,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 71e03168721b0422c952715711bcce90, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ccd2152d0152d48fd99a91b4dcf669aa, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2316,7 +2316,7 @@ MonoBehaviour:
   songDelayInSeconds: 3
   marginOfError: 0.15
   inputDelayInMilliseconds: 25
-  midiJSON: {fileID: 4900000, guid: f7b4d08e8b2bd4e649d9139eabf2d12f, type: 3}
+  midiJSON: {fileID: 4900000, guid: f2816f9802688418db47c9233a5e502b, type: 3}
   noteTime: 3
   noteSpawnX: 16
   noteTapX: 0
