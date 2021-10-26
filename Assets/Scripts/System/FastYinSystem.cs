@@ -22,7 +22,6 @@ public class FastYinSystem : MonoBehaviour
     void Start()
     {
         fastYin = new FastYin(pitchDetector.source.clip.frequency, 1024);
-        StartPlaying();
         //MicrophoneSetup();
     }
 
@@ -53,8 +52,8 @@ public class FastYinSystem : MonoBehaviour
         if (midiNote != 0 && midiNote != tempMidi)
         {
             tempMidi = midiNote;
-            //Debug.Log($"Transcribed : {midiNote}, time : {SongManager.GetAudioSourceTime()}");
-            Debug.Log($"FASTYIN Transcribed : {midiNote}, time : {AudioSettings.dspTime - dspTime}");
+            Debug.Log($"FASTYIN Transcribed : {midiNote}, time : {SongManager.GetAudioSourceTime()}");
+            //Debug.Log($"FASTYIN Transcribed : {midiNote}, time : {AudioSettings.dspTime - dspTime}");
         }
     }
 

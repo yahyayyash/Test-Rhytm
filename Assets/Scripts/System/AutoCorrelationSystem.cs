@@ -20,8 +20,6 @@ public class AutoCorrelationSystem : MonoBehaviour
         pitchTracker = new PitchTracker();
         pitchDetectors = GetComponent<PitchDetector>();
         pitchTracker.SampleRate = 44100;
-        StartPlay();
-
     }
 
     private void Update()
@@ -35,8 +33,8 @@ public class AutoCorrelationSystem : MonoBehaviour
         if (midiNote != 0 && midiNote != tempMidi)
         {
             tempMidi = midiNote;
-            //Debug.Log($"Transcribed : {midiNote}, time : {SongManager.GetAudioSourceTime()}");
-            Debug.Log($"AUTOCORR Transcribed : {midiNote}, time : {AudioSettings.dspTime - dspTime}");
+            Debug.Log($"AUTOCORR Transcribed : {midiNote}, time : {SongManager.GetAudioSourceTime()}");
+            //Debug.Log($"AUTOCORR Transcribed : {midiNote}, time : {AudioSettings.dspTime - dspTime}");
         }
         // pitchDetectors.midiCents = pitchTracker.CurrentPitchRecord.MidiCents;
     }

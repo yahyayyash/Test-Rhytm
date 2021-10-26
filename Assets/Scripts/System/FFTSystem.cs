@@ -11,6 +11,7 @@ public class FFTSystem : MonoBehaviour
     public float dbValue;    // sound level - dB
     public float sensitivity = 100;
     public float loudness = 0;
+    public float pitchValue = 0;
 
     public string microphone = null;
 
@@ -35,7 +36,6 @@ public class FFTSystem : MonoBehaviour
         samples = new float[qSamples];
         spectrum = new float[qSamples];
         fSample = AudioSettings.outputSampleRate;
-        StartPlaying();
     }
 
     void Update()
@@ -87,7 +87,8 @@ public class FFTSystem : MonoBehaviour
         var pitch = freqN * (fSample / 2) / qSamples; // convert index to frequency
         var midiNote = 0;
         var midiCents = 0;
-        
+
+        pitchValue = pitch;
         Pitch.PitchDsp.PitchToMidiNote(pitch, out midiNote, out midiCents);
 
         pitchDetector.pitch = pitch;
@@ -98,7 +99,7 @@ public class FFTSystem : MonoBehaviour
         if (midiNote != 0 && midiNote != tempMidi)
         {
             tempMidi = midiNote;
-            Debug.Log($"FFT Transcribed : {midiNote}, time : {AudioSettings.dspTime - dspTime}");
+            Debug.Log($"FFT Transcribed : {midiNote}, time : {SongManager.GetAudioSourceTime()}");
         }
     }
 
