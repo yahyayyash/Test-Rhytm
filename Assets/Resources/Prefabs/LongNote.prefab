@@ -96,3 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedTime: 0
+  noteLength: 0
+  noteWrong: {fileID: 21300000, guid: 2ee15e76ae8b54239a3e718d9bc90bfd, type: 3}
+  noteRight: {fileID: 21300000, guid: 46a1963c4549548e7ab9466f22532eba, type: 3}

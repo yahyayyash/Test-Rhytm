@@ -8,6 +8,16 @@ public class Note : MonoBehaviour
     public double assignedTime;
     public float noteLength;
 
+    public Sprite noteWrong;
+    public Sprite noteRight;
+
+    private GameObject noteObject;
+
+    private void Awake()
+    {
+        noteObject = GetComponent<GameObject>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

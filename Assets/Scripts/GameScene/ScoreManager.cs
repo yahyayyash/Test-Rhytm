@@ -28,9 +28,9 @@ public class ScoreManager : MonoBehaviour
         comboScore += 1;
         totalScore += (98 + comboScore * 2);
 
-        Instace.AnimateHit(Instace.scoreText.gameObject);
-        Instace.AnimateHit(Instace.comboText.gameObject);
-        Instace.hitSFX.Play();
+        AnimationManager.Instace.AnimateHit(Instace.scoreText.gameObject, 0.25f);
+        AnimationManager.Instace.AnimateHit(Instace.comboText.gameObject, 0.25f);
+        //Instace.hitSFX.Play();
     }
 
     public static void Miss()
@@ -44,11 +44,5 @@ public class ScoreManager : MonoBehaviour
     {
         scoreText.text = totalScore.ToString();
         comboText.text = comboScore.ToString();
-    }
-
-    private void AnimateHit(GameObject scale)
-    {
-        scale.transform.DORewind();
-        scale.transform.DOPunchScale(new Vector3(0.25f, 0.25f, 0.25f), 0.25f, 1, 0);
     }
 }

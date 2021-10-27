@@ -12,7 +12,7 @@ public class SongManager : MonoBehaviour
 
     public PitchDetector detectedPitch;
     public static SongManager Instance;
-    public AudioSource audioSource;
+    
     public Lane lanes;
     public float songDelayInSeconds;
     public double marginOfError; // in seconds
@@ -33,6 +33,8 @@ public class SongManager : MonoBehaviour
         }
     }
 
+    AudioSource audioSource;
+
     // Position Tracking
     double dspTimeSong;
     public bool songPlayed = false;
@@ -43,6 +45,7 @@ public class SongManager : MonoBehaviour
     void Start()
     {
         Instance = this;
+        audioSource = GetComponent<AudioSource>();
         midiFile = MIDI.CreateFromJSON(midiJSON.text);
         GetDataFromMidi();
     }
@@ -62,10 +65,9 @@ public class SongManager : MonoBehaviour
     {
         songPlayed = true;
         dspTimeSong = AudioSettings.dspTime;
-        detectedPitch.source.PlayScheduled(0);
+        //detectedPitch.source.PlayScheduled(0);
+        detectedPitch.GetComponent<FFTSystem>().StartRecording();
         audioSource.PlayScheduled(0);
-        //detectedPitch.source.Play();
-        //audioSource.Play();
     }
 
     // Get current playback position in metric times

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Melanchall.DryWetMidi.Interaction;
 using System;
+using DG.Tweening;
 
 public class Lane : MonoBehaviour
 {
@@ -12,8 +13,6 @@ public class Lane : MonoBehaviour
     public KeyCode input;
     public GameObject notePrefab;
     public GameObject barPrefab;
-    public Sprite noteWrong;
-    public Sprite noteRight;
 
     List<Note> notes = new List<Note>();
     public List<double> timeStamps = new List<double>();
@@ -65,16 +64,11 @@ public class Lane : MonoBehaviour
                 double marginOfError = SongManager.Instance.marginOfError;
                 double audioTime = SongManager.GetAudioSourceTime() - (SongManager.Instance.inputDelayInMilliseconds / 1000.0);
 
-                //if (Input.GetKeyDown(input))
                 if (SongManager.Instance.detectedPitch.midiNote == midiNotes[inputIndex])
                 {
                     if (Math.Abs(audioTime - timeStamp) < marginOfError)
                     {
                         Hit();
-                        notes[inputIndex].gameObject.GetComponent<SpriteRenderer>().sprite = noteRight;
-                        //Destroy(notes[inputIndex].gameObject);
-                        correctNotes++;
-                        inputIndex++;
                     }
                     else
                     {
@@ -85,10 +79,7 @@ public class Lane : MonoBehaviour
                 if (timeStamp + marginOfError <= audioTime)
                 {
                     Miss();
-                    notes[inputIndex].gameObject.GetComponent<SpriteRenderer>().sprite = noteWrong;
-                    inputIndex++;
                 }
-
             }
 
             accuracyScore.text = $"{correctNotes} / {inputIndex}";
@@ -113,13 +104,25 @@ public class Lane : MonoBehaviour
         barIndex++;
     }
 
-    private void Miss()
-    {
-        ScoreManager.Miss();
-    }
-
     private void Hit()
     {
+        var note = notes[inputIndex];
+
         ScoreManager.Hit();
+        note.GetComponent<SpriteRenderer>().sprite = note.noteRight;
+        AnimationManager.Instace.AnimateHit(note.gameObject, 0.1f);
+
+        correctNotes++;
+        inputIndex++;
+    }
+
+    private void Miss()
+    {
+        var note = notes[inputIndex];
+
+        ScoreManager.Miss();
+        notes[inputIndex].GetComponent<SpriteRenderer>().sprite = note.noteWrong;
+        AnimationManager.Instace.AnimateHit(note.gameObject, -0.1f);
+        inputIndex++;
     }
 }

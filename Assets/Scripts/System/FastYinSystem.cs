@@ -4,34 +4,33 @@ using UnityEngine;
 
 public class FastYinSystem : MonoBehaviour
 {
-
-    public TMPro.TextMeshProUGUI frequencyDisplay;
-
     PitchDetector pitchDetector;
-
     FastYin fastYin;
 
+    AudioSource audioSource;
+    string microphone = null;
     int tempMidi = 0;
     double dspTime;
+
     private void Awake()
     {
         pitchDetector = GetComponent<PitchDetector>();
+        audioSource = pitchDetector.source;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         fastYin = new FastYin(pitchDetector.source.clip.frequency, 1024);
-        //MicrophoneSetup();
     }
 
     // Update is called once per frame
     void Update()
     {
-        FastYin();
+        AnalyzeSound();
     }
 
-    private void FastYin()
+    private void AnalyzeSound()
     {
         var buffer = new float[1024];
         pitchDetector.source.GetOutputData(buffer, 0);
@@ -47,8 +46,6 @@ public class FastYinSystem : MonoBehaviour
         pitchDetector.pitch = pitch;
         pitchDetector.midiNote = midiNote;
 
-        //frequencyDisplay.text = $"{pitch} Hz";
-
         if (midiNote != 0 && midiNote != tempMidi)
         {
             tempMidi = midiNote;
@@ -57,26 +54,23 @@ public class FastYinSystem : MonoBehaviour
         }
     }
 
-    void StartPlaying()
-    {
-        dspTime = AudioSettings.dspTime;
-        pitchDetector.source.PlayScheduled(0);
-    }
+    //void StartPlaying()
+    //{
+    //    dspTime = AudioSettings.dspTime;
+    //    pitchDetector.source.PlayScheduled(0);
+    //}
 
-    void MicrophoneSetup()
+    public void StarRecording()
     {
-        if (Microphone.IsRecording(null))
+        audioSource.clip = Microphone.Start(null, true, 60, 44100);
+
+        audioSource.loop = true;
+        audioSource.mute = false;
+
+        if (Microphone.IsRecording(microphone))
         {
-            pitchDetector.source.Stop();
-            pitchDetector.source.clip = Microphone.Start(null, true, 1, 44100);
-            pitchDetector.source.loop = true;
-            pitchDetector.source.mute = false;
-            pitchDetector.source.Play();
-        }
-        else
-        {
-            pitchDetector.source.Stop();
-            Microphone.End(null);
+            while (!(Microphone.GetPosition(microphone) > 0)) { }
+            audioSource.Play();
         }
     }
 }
